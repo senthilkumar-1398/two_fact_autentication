@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "two_fact_auth"
 include ':app'
+include ':twofact'
