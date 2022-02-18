@@ -1,18 +1,13 @@
 package com.example.two_fact_auth;
 
-import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,17 +17,12 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.WriterException;
-
-import java.util.HashMap;
-import java.util.Random;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -64,7 +54,7 @@ public class TwoFactorAuthentication extends AppCompatActivity {
 
     // creating a variable for
     // our object class
-    AuthenticationInfoModel authenticationInfoClass;
+//    AuthenticationInfoModel authenticationInfoClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,26 +161,26 @@ public class TwoFactorAuthentication extends AppCompatActivity {
         }
         return bitmap;
     }
-
-    private void addDataToFirebase(int status, String code, int randomCode) {
-        // below 3 lines of code is used to set
-        // data in our object class.
-        authenticationInfoClass.setStatus( status );
-        authenticationInfoClass.setAutoGenCode( randomCode );
-        authenticationInfoClass.setUniqueNo( code );
-        // we are use add value event listener method
-        // which is called with database reference.
-        databaseReference.addValueEventListener( new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseReference.child( code ).setValue( authenticationInfoClass );
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        } );
-    }
+//
+//    private void addDataToFirebase(int status, String code, int randomCode) {
+//        // below 3 lines of code is used to set
+//        // data in our object class.
+//        authenticationInfoClass.setStatus( status );
+//        authenticationInfoClass.setAutoGenCode( randomCode );
+//        authenticationInfoClass.setUniqueNo( code );
+//        // we are use add value event listener method
+//        // which is called with database reference.
+//        databaseReference.addValueEventListener( new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                databaseReference.child( code ).setValue( authenticationInfoClass );
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        } );
+//    }
 //
 //    public void updateDisableStatusInFirebase() {
 //        HashMap statusUpdate = new HashMap();

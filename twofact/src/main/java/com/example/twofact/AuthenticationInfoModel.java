@@ -1,4 +1,4 @@
-package com.example.two_fact_auth;
+package com.example.twofact;
 
 public class AuthenticationInfoModel {
     public int status;
