@@ -8,10 +8,14 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.WriterException;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -22,15 +26,16 @@ public class TwoFactorAuth {
     QRGEncoder qrgEncoder;
     Bitmap bitmap;
 
-    FirebaseDatabase firebaseDatabase;
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
     // creating a variable for our Database
     // Reference for Firebase.
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference = firebaseDatabase.getReference( "AuthenticationInfo" );
 
     // creating a variable for
     // our object class
-    AuthenticationInfoModel authenticationInfoClass;
+    AuthenticationInfoModel authenticationInfoClass = new AuthenticationInfoModel();
+
 
     public TwoFactorAuth(Context context) {
         this.context = context;
@@ -71,4 +76,41 @@ public class TwoFactorAuth {
         }
         return bitmap;
     }
+
+    public void addDataToFirebase(int status, String uniqueCode, int randomCode) {
+        // below 3 lines of code is used to set
+        // data in our object class.
+        authenticationInfoClass.setStatus( status );
+        authenticationInfoClass.setAutoGenCode( randomCode );
+        authenticationInfoClass.setUniqueNo( uniqueCode );
+        // we are use add value event listener method
+        // which is called with database reference.
+        databaseReference.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.child( uniqueCode ).setValue( authenticationInfoClass );
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        } );
+    }
+
+
+    //    public void updateDisableStatusInFirebase() {
+//        HashMap statusUpdate = new HashMap();
+//        statusUpdate.put( "status", 0 );
+//        databaseReference.child( yourKey ).updateChildren( statusUpdate ).addOnCompleteListener( new OnCompleteListener() {
+//            @Override
+//            public void onComplete(@NonNull Task task) {
+//                if (task.isSuccessful()) {
+//                    Log.e( "2FA", "onComplete: " );
+//                    sharedPreferenceEditor.putString( TwoFactorAuthenticationActivity.this, "authentication_enable", "0" );
+//                } else {
+//                    Toast.makeText( TwoFactorAuthenticationActivity.this, "Fail to add data ", Toast.LENGTH_SHORT ).show();
+//                }
+//            }
+//        } );
+//    }
 }
