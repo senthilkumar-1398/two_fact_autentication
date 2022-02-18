@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.two_factor_authentication"
+        applicationId "com.example.two_fact_auth"
         minSdk 21
         targetSdk 31
         versionCode 1

@@ -1,4 +1,4 @@
-package com.example.two_factor_authentication;
+package com.example.two_fact_auth;
 
 import org.junit.Test;
 
