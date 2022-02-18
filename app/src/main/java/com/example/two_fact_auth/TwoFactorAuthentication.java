@@ -72,10 +72,10 @@ public class TwoFactorAuthentication extends AppCompatActivity {
 //        ivQrCode = findViewById( R.id.iv_qr_code );
 //        // below line is used to get the
 //        // instance of our FIrebase database.
-//        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 //
 //        // below line is used to get reference for our database.
-//        databaseReference = firebaseDatabase.getReference( "AuthenticationInfo" );
+        databaseReference = firebaseDatabase.getReference( "AuthenticationInfo" );
 //
 //        // initializing our object
 //        // class variable.
